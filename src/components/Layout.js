@@ -1,14 +1,14 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import Sidebar from '../components/Sidebar'
 import useSiteMetadata from './SiteMetadata'
 
 import '../styles/main.scss'
 import 'font-awesome/scss/font-awesome.scss'
 
 const TemplateWrapper = ({ children }) => {
-  const { title, description } = useSiteMetadata()
+  const { title, description, companyName } = useSiteMetadata()
   return (
     <div>
       <Helmet>
@@ -46,9 +46,8 @@ const TemplateWrapper = ({ children }) => {
         <meta property="og:url" content="/" />
         <meta property="og:image" content="/img/og-image.jpg" />
       </Helmet>
-      <Navbar />
-      <div>{children}</div>
-      <Footer />
+      {children}
+      <Footer companyName={companyName}/>
     </div>
   )
 }
