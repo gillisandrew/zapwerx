@@ -69,8 +69,10 @@ main:
     image: /img/products-grid1.jpg
 address:
   city: 'Hudson, QC'
+  country: Canada
   line1: 12345 Somewhere Road
   line2: Unit 678
   postalCode: J0P 1H0
+sections: Why Kaldi
 ---
 
