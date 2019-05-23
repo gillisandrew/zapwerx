@@ -1,8 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Footer from '../components/Footer'
-import Sidebar from '../components/Sidebar'
-import useSiteMetadata from './SiteMetadata'
+import useSiteMetadata from '../query/SiteMetadata'
 
 import '../styles/main.scss'
 import 'font-awesome/scss/font-awesome.scss'

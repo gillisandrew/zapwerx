@@ -6,6 +6,18 @@ module.exports = {
     description:
       'This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.',
     companyName: 'ZapWerx',
+    social: [
+      {
+        icon: 'fa-github',
+        title: 'GitHub',
+        url: 'https://github.com/zapwerx'
+      },
+      {
+        icon: 'fa-linkedin',
+        title: 'LinkedIn',
+        url: 'https://github.com/linkedin'
+      },
+    ]
   },
   plugins: [
     'gatsby-plugin-react-helmet',

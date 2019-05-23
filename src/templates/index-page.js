@@ -1,22 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 
 import Layout from "../components/Layout";
 import Sidebar from "../components/Sidebar";
-import pic1 from "../images/pic01.jpg";
 import Contact from "../components/Contact";
 
-export const IndexPageTemplate = ({
-  image,
-  title,
-  heading,
-  subheading,
-  mainpitch,
-  description,
-  intro
-}) => (
-  <div id="wrapper">
+const Intro = ({heading, subheading}) => {
+  if(heading && subheading) {
+    return (
     <section id="intro" className="wrapper style1 fullscreen fade-up">
       <div className="inner">
         <h1>{heading}</h1>
@@ -30,27 +22,20 @@ export const IndexPageTemplate = ({
         </ul>
       </div>
     </section>
-    <section id="one" className="wrapper style1 spotlights">
-      <section>
-        <a href="/#" className="image" alt="image">
-          <img src={pic1} alt="" data-position="center center" />
-        </a>
-        <div className="content">
-          <div className="inner">
-            <h2>{mainpitch.title}</h2>
-            <p>{mainpitch.description}</p>
-            <ul className="actions">
-              <li>
-                <Link className="button" to="/about">
-                  Learn more
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </section>
-    <Contact />
+    )
+  }else {
+    return null
+  }
+}
+
+export const IndexPageTemplate = ({
+  heading,
+  subheading,
+  address
+}) => (
+  <div id="wrapper">
+    <Intro heading={heading} subheading={subheading}/>
+    <Contact address={address}/>
   </div>
 );
 
@@ -59,11 +44,6 @@ IndexPageTemplate.propTypes = {
   title: PropTypes.string,
   heading: PropTypes.string,
   subheading: PropTypes.string,
-  mainpitch: PropTypes.object,
-  description: PropTypes.string,
-  intro: PropTypes.shape({
-    blurbs: PropTypes.array
-  })
 };
 
 const IndexPage = ({ data }) => {
@@ -77,9 +57,7 @@ const IndexPage = ({ data }) => {
         title={frontmatter.title}
         heading={frontmatter.heading}
         subheading={frontmatter.subheading}
-        mainpitch={frontmatter.mainpitch}
-        description={frontmatter.description}
-        intro={frontmatter.intro}
+        address={frontmatter.address}
       />
     </Layout>
   );
@@ -109,24 +87,11 @@ export const pageQuery = graphql`
         }
         heading
         subheading
-        mainpitch {
-          title
-          description
-        }
-        description
-        intro {
-          blurbs {
-            image {
-              childImageSharp {
-                fluid(maxWidth: 240, quality: 64) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            text
-          }
-          heading
-          description
+        address {
+          line1
+          line2
+          city
+          postalCode
         }
       }
     }
