@@ -7,9 +7,7 @@ export class Sidebar extends Component {
     super(props);
     this.state = {
       tabs: [
-        { content: 'Welcome', href: '#intro' },
-        { content: 'Who we are', href: '#main' },
-        { content: 'Get in touch', href: '#contact' },
+        ...props.tabs
       ],
     };
 

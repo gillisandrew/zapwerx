@@ -6,6 +6,10 @@ import Layout from "../components/Layout";
 import Sidebar from "../components/Sidebar";
 import Contact from "../components/Contact";
 
+function toKebabCase(input) {
+  return input.toLowerCase().replace(/([^a-z]+)/g, '-')
+}
+
 const Intro = ({heading, subheading}) => {
   if(heading && subheading) {
     return (
@@ -28,13 +32,28 @@ const Intro = ({heading, subheading}) => {
   }
 }
 
+const Section = ({heading, content, style}) => {
+  return (
+    <section id={toKebabCase(heading)} className={``}>
+      <div class="image"></div>
+      <div className={'content'}>
+        <h2>{heading}</h2>
+        <p>{content}</p>
+      </div>
+    </section>
+  )
+}
 export const IndexPageTemplate = ({
   heading,
   subheading,
-  address
+  address,
+  sections
 }) => (
   <div id="wrapper">
     <Intro heading={heading} subheading={subheading}/>
+    <div className="wrapper style2 spotlights">
+      {sections.map((section) => <Section {...section} />)}
+    </div>
     <Contact address={address}/>
   </div>
 );
@@ -51,13 +70,18 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <Sidebar />
+      <Sidebar tabs={[
+        { content: 'Welcome', href: '#intro' },
+        ...frontmatter.sections.map(section => ({ content: section.heading, href: `#${toKebabCase(section.heading)}`})),
+        { content: 'Get in touch', href: '#contact' },
+        ]}/>
       <IndexPageTemplate
         image={frontmatter.image}
         title={frontmatter.title}
         heading={frontmatter.heading}
         subheading={frontmatter.subheading}
         address={frontmatter.address}
+        sections={frontmatter.sections}
       />
     </Layout>
   );
@@ -87,12 +111,17 @@ export const pageQuery = graphql`
         }
         heading
         subheading
+        sections {
+          content
+          heading
+        }
         address {
           line1
           line2
           city
           postalCode
         }
+        
       }
     }
   }
