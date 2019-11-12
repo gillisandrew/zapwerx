@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Andrew Gillis",
   "dependencies": {
-    "bulma": "^0.7.0",
+    "bulma": "^0.8.0",
     "font-awesome": "^4.7.0",
     "gatsby": "^2.1.34",
     "gatsby-image": "^2.0.23",
